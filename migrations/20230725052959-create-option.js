@@ -2,36 +2,33 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('options', {
-      id: {
+    await queryInterface.createTable('Options', {
+      optionId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT,
       },
-      option_id: {
-        type: Sequelize.BIGINT
+      extraPrice: {
+        type: Sequelize.BIGINT,
       },
-      extra_price: {
-        type: Sequelize.BIGINT
-      },
-      shot_price: {
-        type: Sequelize.BIGINT
+      shotPrice: {
+        type: Sequelize.BIGINT,
       },
       hot: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('options');
-  }
+    await queryInterface.dropTable('Options');
+  },
 };
