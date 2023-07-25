@@ -5,14 +5,22 @@ module.exports = {
     await queryInterface.createTable('ItemOrderCustomers', {
       itemId: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
+        references: {
+          model: 'Items',
+          key: 'itemId',
+        },
         type: Sequelize.BIGINT,
       },
-      orederCustomerId: {
+      orderCustomerId: {
+        allowNull: false,
         type: Sequelize.BIGINT,
+        references: {
+          model: 'OrderCustomers',
+          key: 'orderCustomerId',
+        },
       },
       amount: {
+        allowNull: false,
         type: Sequelize.BIGINT,
       },
       createdAt: {

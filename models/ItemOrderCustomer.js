@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasOne(models.OrderCustomer, {
+        targetKey: 'orderCustomerId',
+        foreignKey: 'orderCustomerId',
+      });
+      this.hasOne(models.Item, {
+        targetKey: 'itemId',
+        foreignKey: 'itemId',
+      });
     }
   }
   ItemOrderCustomer.init(
@@ -19,10 +27,12 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.BIGINT,
       },
-      orederCustomerId: {
+      orderCustomerId: {
+        allowNull: false,
         type: DataTypes.BIGINT,
       },
       amount: {
+        allowNull: false,
         type: DataTypes.BIGINT,
       },
       createdAt: {

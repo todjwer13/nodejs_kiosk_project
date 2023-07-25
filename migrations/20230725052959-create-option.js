@@ -10,12 +10,15 @@ module.exports = {
         type: Sequelize.BIGINT,
       },
       extraPrice: {
+        allowNull: false,
         type: Sequelize.BIGINT,
       },
       shotPrice: {
+        allowNull: false,
         type: Sequelize.BIGINT,
       },
       hot: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {

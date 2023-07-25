@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Item, {
+        targetKey: 'optionId',
+        foreignKey: 'optionId',
+      });
     }
   }
   Option.init(
@@ -20,12 +24,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BIGINT,
       },
       extraPrice: {
+        allowNull: false,
         type: DataTypes.BIGINT,
       },
       shotPrice: {
+        allowNull: false,
         type: DataTypes.BIGINT,
       },
       hot: {
+        allowNull: false,
         type: DataTypes.BOOLEAN,
       },
       createdAt: {

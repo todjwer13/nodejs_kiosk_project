@@ -10,19 +10,30 @@ module.exports = {
         type: Sequelize.BIGINT,
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       optionId: {
+        allowNull: false,
         type: Sequelize.BIGINT,
+        references: {
+          model: 'Options',
+          key: 'optionId',
+        },
+        defaultValue: 0,
       },
       price: {
+        allowNull: false,
         type: Sequelize.BIGINT,
       },
       type: {
-        type: Sequelize.ENUM,
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       amount: {
+        allowNull: false,
         type: Sequelize.BIGINT,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,

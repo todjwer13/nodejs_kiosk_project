@@ -3,13 +3,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('OrderCustomers', {
-      orederCustomerId: {
+      orderCustomerId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT,
       },
       state: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {
