@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasOne(models.OrderCustomer, {
+      this.belongsTo(models.OrderCustomer, {
         targetKey: 'orderCustomerId',
         foreignKey: 'orderCustomerId',
       });
@@ -17,14 +17,22 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'itemId',
         foreignKey: 'itemId',
       });
+      this.belongsTo(models.Option, {
+        sourceKey: 'optionId',
+        foreignKey: 'optionId',
+      });
     }
   }
   ItemOrderCustomer.init(
     {
-      itemId: {
+      Id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: DataTypes.BIGINT,
+      },
+      itemId: {
+        allowNull: false,
         type: DataTypes.BIGINT,
       },
       orderCustomerId: {
@@ -32,6 +40,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BIGINT,
       },
       amount: {
+        allowNull: false,
+        type: DataTypes.BIGINT,
+      },
+      optionId: {
+        type: DataTypes.JSON,
+      },
+      price: {
         allowNull: false,
         type: DataTypes.BIGINT,
       },

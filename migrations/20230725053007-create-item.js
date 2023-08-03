@@ -17,10 +17,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.BIGINT,
         references: {
-          model: 'Options',
+          model: 'Item',
           key: 'optionId',
         },
-        defaultValue: 0,
       },
       price: {
         allowNull: false,
@@ -28,7 +27,7 @@ module.exports = {
       },
       type: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('coffee', 'juice', 'food'),
       },
       amount: {
         allowNull: false,

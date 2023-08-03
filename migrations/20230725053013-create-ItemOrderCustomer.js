@@ -3,23 +3,32 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('ItemOrderCustomers', {
+      Id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.BIGINT,
+      },
       itemId: {
         allowNull: false,
-        references: {
-          model: 'Items',
-          key: 'itemId',
-        },
         type: Sequelize.BIGINT,
       },
       orderCustomerId: {
         allowNull: false,
         type: Sequelize.BIGINT,
-        references: {
-          model: 'OrderCustomers',
-          key: 'orderCustomerId',
-        },
       },
       amount: {
+        allowNull: false,
+        type: Sequelize.BIGINT,
+      },
+      optionId: {
+        type: Sequelize.JSON,
+        references: {
+          model: 'Option',
+          key: 'optionId',
+        },
+      },
+      price: {
         allowNull: false,
         type: Sequelize.BIGINT,
       },

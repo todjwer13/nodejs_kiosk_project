@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasOne(models.ItemOrderCustomer, {
-        targetKey: 'orderCustomerId',
+      this.hasMany(models.ItemOrderCustomer, {
+        sourceKey: 'orderCustomerId',
         foreignKey: 'orderCustomerId',
       });
     }
@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       state: {
         allowNull: false,
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
