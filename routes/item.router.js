@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { Item } = require('../models');
+const { Item, Option } = require('../models');
 
 // 상품 추가 API
 router.post('/item', async (req, res) => {
-  const { name, price, type } = req.body;
+  const { name, price, type, optionId } = req.body;
   try {
     if (!name || !price) {
       return res.status(400).json({ message: '이름과 가격을 입력해주십시오.' });
@@ -12,11 +12,16 @@ router.post('/item', async (req, res) => {
     if (!['coffee', 'juice', 'food'].includes(type)) {
       return res.status(400).json({ message: '알맞은 타입을 지정해주십시오.' });
     }
+    const option = await Option.fidnOne({ where: { optionId } });
+    if (!option) {
+      res.status(400).json({ message: '존재하지 않는 옵션입니다.' });
+    }
 
     const createItem = await Item.create({
       name,
       price,
       type,
+      optionId,
     });
     res.status(200).json({ message: '상품이 추가되었습니다.', createItem });
   } catch (error) {
@@ -53,7 +58,7 @@ router.get('/item/:type', async (req, res) => {
 // 상품 수정 API
 router.put('/item/:itemId', async (req, res) => {
   const { itemId } = req.params;
-  const { name, price, type } = req.body;
+  const { name, price, type, optionId } = req.body;
   try {
     const item = await Item.findOne({ where: { itemId } });
     if (!item) {
@@ -65,7 +70,11 @@ router.put('/item/:itemId', async (req, res) => {
     if (!['coffee', 'juice', 'food'].includes(type)) {
       return res.status(400).json({ message: '알맞은 타입을 지정해주십시오.' });
     }
-    await Item.update({ name, price, type }, { where: { itemId } });
+    const option = await Option.fidnOne({ where: { optionId } });
+    if (!option) {
+      res.status(400).json({ message: '존재하지 않는 옵션입니다.' });
+    }
+    await Item.update({ name, price, type, optionId }, { where: { itemId } });
     res.status(200).json({ message: '상품이 수정되었습니다.' });
   } catch (error) {
     return res.status(500).json({ errorMessage: '오류가 발생하였습니다.' });
